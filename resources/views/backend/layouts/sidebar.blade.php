@@ -40,6 +40,12 @@
                     </a>
                 </li>
                 <li>
+                    <a href="{{ URL :: to('/admin/users') }}">
+                        <i class="metismenu-icon pe-7s-users"></i>
+                        Users
+                    </a>
+                </li>
+                <li>
                     <a href="#">
                         <i class="metismenu-icon pe-7s-menu"></i>
                         Examples
@@ -58,7 +64,6 @@
                         </li>
                     </ul>
                 </li>
-
                 <li>
                     <a href="#">
                         <i class="metismenu-icon pe-7s-diamond"></i>
@@ -66,12 +71,6 @@
                         <i class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
                     </a>
                     <ul>
-                        <li>
-                            <a href="{{ URL :: to('/admin/users') }}">
-                                <i class="metismenu-icon"></i>
-                                Users
-                            </a>
-                        </li>
                         <li>
                             <a href="{{ URL :: to('/admin/roles') }}">
                                 <i class="metismenu-icon"></i>

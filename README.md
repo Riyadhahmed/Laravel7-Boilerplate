@@ -28,7 +28,7 @@
     3. Update .env file by adding database information like DB_HOST.  
     4. Go to project root folder.Open git bash or terminal and run  composer install       
     5. Run php artisan key:generate in the terminal    
-    6. Run php artisan migrate  
+    6. Run php artisan migrate  // Alternate import db.sql from db folder
     
 ### Seeder Class
     1. php artisan db:seed   to seed all seeder  
@@ -73,9 +73,9 @@
         
 Screenshot : 
 
-![alt text](./screenshot/Dashboard.png)
-![alt text](./screenshot/Permission.png)
-![alt text](./screenshot/News.png)
+![alt text](./screenshot/dashboard.png)
+![alt text](./screenshot/permission.png)
+![alt text](./screenshot/roles.png)
 
 
  Find me on  Linkedin  : [My Linkedin profile  link](https://www.linkedin.com/in/monjur-morshed-riyadh-6aaba465/)  \

@@ -39,7 +39,7 @@
                         <div class="widget-content-left">
                             <div class="btn-group">
                                 <a data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="p-0 btn">
-                                   <img class="rounded-circle" src="{{ asset('assets/images/users/default.png') }}"
+                                    <img class="rounded-circle" src="{{ asset('assets/images/users/default.png') }}"
                                          alt="" width="42">
                                     <i class="fa fa-angle-down ml-2 opacity-8"></i>
                                 </a>

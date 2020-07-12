@@ -16,7 +16,7 @@
     </div>
     <div class="app-wrapper-footer">
         @include('backend.layouts.footer')
-        @include('backend.partials.modal')
+        @include('backend.layouts.modal')
         @include('backend.layouts.datatable')
     </div>
 </div>

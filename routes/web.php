@@ -31,6 +31,24 @@ Route::group([
         require base_path('routes/backend/admin.php');
     });
 
+// User Auth
+Route::prefix('user_login')->group(function () {
+    Route::get('login', 'Auth\User\LoginController@login')->name('user.auth.login');
+    Route::post('login', 'Auth\User\LoginController@loginUser')->name('user.auth.loginUser');
+    Route::post('logout', 'Auth\User\LoginController@logout')->name('user.auth.logout');
+    Route::get('logout', 'Auth\User\LoginController@logout');
+});
+
+// User Dashborad
+Route::group([
+    'namespace' => 'Backend\User',
+    'prefix' => 'user',
+    'as' => 'user.',
+    'middleware' => 'auth:user'],
+    function () {
+        require base_path('routes/backend/user.php');
+    });
+
 // clear config and cache
 //['cache:clear', 'optimize', 'route:cache', 'route:clear', 'view:clear', 'config:cache']
 

@@ -3,52 +3,25 @@
     {{method_field('PATCH')}}
     <div class="form-row">
         <div id="status"></div>
-        <div class="form-group col-md-4 col-sm-12">
+        <div class="form-group col-md-6 col-sm-12">
             <label for=""> Name </label>
             <input type="text" class="form-control" id="name" name="name" value="{{$user->name}}" placeholder=""
                    required>
             <span id="error_name" class="has-error"></span>
         </div>
-        <div class="form-group col-md-4 col-sm-12">
+        <div class="form-group col-md-6 col-sm-12">
             <label for=""> Email </label>
             <input type="text" class="form-control" id="email" name="email" value="{{$user->email}}" placeholder=""
                    readonly required>
             <span id="error_email" class="has-error"></span>
         </div>
-        <div class="form-group col-md-4 col-sm-12">
-            <label for=""> Mobile </label>
-            <input type="text" class="form-control" id="mobile" name="mobile" value="{{$user->mobile}}" placeholder=""
-                   required>
-            <span id="error_mobile" class="has-error"></span>
-        </div>
-        <div class="clearfix"></div>
-        <div class="form-group col-md-3 col-sm-12">
-            <label for=""> User Type </label>
-            <select name="user_type" id="user_type" class="form-control" required>
-                <option value="{{$user->user_type}}" selected>{{$user->user_type}}</option>
-                <option value="Expert">Expert</option>
-                <option value="Members">Members</option>
-            </select>
-            <span id="error_user_type" class="has-error"></span>
-        </div>
-        <div class="form-group col-md-3 col-sm-12">
-            <label for=""> Department </label>
-            <select name="department_id" id="department_id" class="form-control" required>
-                <option value="" disabled>Choose Department</option>
-                @foreach($department as $dept)
-                    <option value="{{$dept->id}}"
-                        {{$user->department_id==$dept->id ? 'selected':''}}>{{$dept->dept_name}}</option>
-                @endforeach
-            </select>
-            <span id="error_category" class="has-error"></span>
-        </div>
-        <div class="form-group col-md-3 col-sm-12">
+        <div class="form-group col-md-6 col-sm-12">
             <label for=""> Password </label>
             <input type="text" class="form-control" id="password" name="password" value="" placeholder=""
                    required>
             <span id="error_password" class="has-error"></span>
         </div>
-        <div class="form-group col-md-3">
+        <div class="form-group col-md-6">
             <label for=""> Status </label><br/>
             <input type="radio" name="status" class="flat-green"
                    value="1" {{ ( $user->status == 1 ) ? 'checked' : '' }} /> Active
@@ -56,7 +29,7 @@
                    value="0" {{ ( $user->status == 0 ) ? 'checked' : '' }}/> In Active
         </div>
         <div class="clearfix"></div>
-        <div class="col-md-8">
+        <div class="col-md-12">
             <label for="photo">Upload Image</label>
             <input id="photo" type="file" name="photo" style="display:none">
             <div class="input-group">
@@ -83,9 +56,7 @@
         </div>
     </div>
 </form>
-
 <script>
-
     $(document).ready(function () {
         $('#edit').validate({// <- attach '.validate()' to your form
             // Rules for form validation

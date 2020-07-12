@@ -81,12 +81,9 @@
             <div class="input-group">
                 <div class="input-group-btn">
                     <a class="btn btn-success" onclick="$('input[id=logo]').click();">Browse</a>
-
-                </div><!-- /btn-group -->
-
+                </div>
                 <input type="text" name="SelectedFileName" class="form-control" id="SelectedFileName"
                        value="{{$settings->logo}}" readonly>
-
             </div>
             <div style="clear:both;"></div>
             <p class="help-block">File Extention must be jpg, jpeg, png. </p>

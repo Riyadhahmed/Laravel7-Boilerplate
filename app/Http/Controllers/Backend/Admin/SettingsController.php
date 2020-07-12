@@ -135,7 +135,8 @@ class SettingsController extends Controller
                     'name' => 'required',
                     'email' => 'required|email|unique:settings,email,' . $setting->id,
                     'contact' => 'required',
-                    'address' => 'required'
+                    'address' => 'required',
+                    'logo' => 'image|max:2024|mimes:jpeg,jpg,png'
                 ];
                 $validator = Validator::make($request->all(), $rules);
 
@@ -144,52 +145,24 @@ class SettingsController extends Controller
                 } else {
 
                     if ($request->hasFile('logo')) {
-                        // return 'has file';
-                        $rules = [
-                            'logo' => 'required|image|max:1024|mimes:jpeg,jpg,gif,bmp,png'
-                        ];
-                        $messages = [
-                            'logo.required' => 'Please choose an image'
-                        ];
-
-                        $validator = Validator::make($request->all(), $rules, $messages);
-
-                        if ($validator->fails()) {
+                        if ($request->file('logo')->isValid()) {
+                            $destinationPath = public_path('assets/images/logo');
+                            $extension = $request->file('logo')->getClientOriginalExtension();
+                            $fileName = time() . '.' . $extension;
+                            $file_path = 'assets/images/logo/' . $fileName;
+                            $request->file('logo')->move($destinationPath, $fileName);
+                            File::delete($old_file); //unlink($old_file);
+                        } else {
                             return response()->json([
                                 'type' => 'error',
-                                'message' => "<div class='alert alert-warning'>Please! Choose an Image File  with jpg , jpeg , png format</div>"
+                                'message' => "<div class='alert alert-warning'>Please! File is not valid</div>"
                             ]);
-                        } else {
-
-                            if ($request->file('logo')->isValid()) {
-                                $destinationPath = public_path('assets/images/logo');
-                                $extension = $request->file('logo')->getClientOriginalExtension(); // getting image extension
-                                $fileName = time() . '.' . $extension; // renameing image
-                                $file_path = 'assets/images/logo/' . $fileName;
-                                $request->file('logo')->move($destinationPath, $fileName); // uploading file to given path
-                                $upload_ok = 1;
-                                File::delete($old_file); //unlink($old_file);
-                            } else {
-                                $upload_ok = 0;
-                                return response()->json([
-                                    'type' => 'error',
-                                    'message' => "<div class='alert alert-warning'>Please! File is not valid</div>"
-                                ]);
-                            }
-
                         }
+
                     } else {
                         $file_path = $old_file;
-                        $upload_ok = 1;
                     }
-                }
 
-                if ($upload_ok == 0) {
-                    return response()->json([
-                        'type' => 'error',
-                        'message' => "<div class='alert alert-warning'>Sorry Failed</div>"
-                    ]);
-                } else {
                     $settings->name = $request->input('name');
                     $settings->slogan = $request->input('slogan');
                     $settings->contact = $request->input('contact');
@@ -206,7 +179,6 @@ class SettingsController extends Controller
                     $settings->save();
                     return response()->json(['type' => 'success', 'message' => "Successfully Updated"]);
                 }
-
 
             } else {
                 abort(403, 'Sorry, you are not authorized to access the page');

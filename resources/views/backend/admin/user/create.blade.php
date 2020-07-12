@@ -2,53 +2,29 @@
       novalidate>
     <div class="form-row">
         <div id="status"></div>
-        <div class="form-group col-md-4 col-sm-12">
+        <div class="form-group col-md-6 col-sm-12">
             <label for=""> Name </label>
             <input type="text" class="form-control" id="name" name="name" value="" placeholder="" required>
             <span id="error_name" class="has-error"></span>
         </div>
-        <div class="form-group col-md-4 col-sm-12">
+        <div class="form-group col-md-6 col-sm-12">
             <label for=""> Email </label>
             <input type="text" class="form-control" id="email" name="email" value="" placeholder="" required>
             <span id="error_email" class="has-error"></span>
         </div>
-        <div class="form-group col-md-4 col-sm-12">
-            <label for=""> Mobile </label>
-            <input type="text" class="form-control" id="mobile" name="mobile" value="" placeholder="" required>
-            <span id="error_mobile" class="has-error"></span>
-        </div>
         <div class="clearfix"></div>
-        <div class="form-group col-md-3 col-sm-12">
-            <label for=""> User Type </label>
-            <select name="user_type" id="user_type" class="form-control" required>
-                <option value="" selected disabled>Choose User Type</option>
-                <option value="Expert">Expert</option>
-                <option value="Members">Members</option>
-            </select>
-            <span id="error_user_type" class="has-error"></span>
-        </div>
-        <div class="form-group col-md-3 col-sm-12">
-            <label for=""> Department </label>
-            <select name="department_id" id="department_id" class="form-control" required>
-                <option value="" selected disabled>Choose Department</option>
-                @foreach($department as $dept)
-                    <option value="{{$dept->id}}">{{$dept->dept_name}}</option>
-                @endforeach
-            </select>
-            <span id="error_category" class="has-error"></span>
-        </div>
-        <div class="form-group col-md-3 col-sm-12">
+        <div class="form-group col-md-6 col-sm-12">
             <label>Password:</label>
             {!! Form::password('password', array('placeholder' => 'Password','class' => 'form-control','required')) !!}
             <span id="error_password" class="has-error"></span>
         </div>
-        <div class="form-group col-md-3 col-sm-12">
+        <div class="form-group col-md-6 col-sm-12">
             <label>Confirm Password:</label>
             {!! Form::password('confirm-password', array('placeholder' => 'Confirm Password','class' => 'form-control','required')) !!}
             <span id="error_confirm-password" class="has-error"></span>
         </div>
         <div class="clearfix"></div>
-        <div class="col-md-8">
+        <div class="col-md-12">
             <label for="photo">Upload Image</label>
             <input id="photo" type="file" name="photo" style="display:none">
             <div class="input-group">
