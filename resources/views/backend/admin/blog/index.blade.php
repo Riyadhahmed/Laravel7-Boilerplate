@@ -1,5 +1,5 @@
 @extends('backend.layouts.master')
-@section('title', ' All Users')
+@section('title', ' All Blogs')
 @section('content')
     <div class="app-page-title">
         <div class="page-title-wrapper">
@@ -7,12 +7,12 @@
                 <div class="page-title-icon">
                     <i class="pe-7s-users icon-gradient bg-mean-fruit"> </i>
                 </div>
-                <div>All Users</div>
+                <div>All BLogs</div>
                 <div class="d-inline-block ml-2">
-                    @can('user-create')
+                    @can('blogs-create')
                         <button class="btn btn-success" onclick="create()"><i
                                     class="glyphicon glyphicon-plus"></i>
-                            New User
+                            New Blogs
                         </button>
                     @endcan
                 </div>
@@ -29,9 +29,8 @@
                             <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Photo</th>
-                                <th>User Name</th>
-                                <th>Email</th>
+                                <th>Image</th>
+                                <th>Title</th>
                                 <th>Status</th>
                                 <th>Action</th>
                             </tr>
@@ -47,32 +46,26 @@
     <style>
         @media screen and (min-width: 768px) {
             #myModal .modal-dialog {
-                width: 55%;
+                width: 70%;
                 border-radius: 5px;
             }
         }
     </style>
     <script>
         $(function () {
-            var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
             table = $('#manage_all').DataTable({
                 processing: true,
                 serverSide: true,
-                ajax: {
-                    "url": '{!! route('admin.allUser.users') !!}',
-                    "type": "GET",
-                    headers: {
-                        "X-CSRF-TOKEN": CSRF_TOKEN,
-                    },
-                    "dataType": 'json'
-                },
+                ajax: '/admin/allBlogs',
                 columns: [
                     {data: 'DT_RowIndex', name: 'DT_RowIndex'},
                     {data: 'file_path', name: 'file_path'},
-                    {data: 'name', name: 'name'},
-                    {data: 'email', name: 'email'},
+                    {data: 'title', name: 'title'},
                     {data: 'status', name: 'status'},
                     {data: 'action', name: 'action'}
+                ],
+                "columnDefs": [
+                    {"className": "", "targets": "_all"}
                 ],
                 "autoWidth": false,
             });
@@ -80,7 +73,6 @@
                 'width': '220px',
                 'height': '30px'
             });
-
         });
     </script>
     <script type="text/javascript">
@@ -93,11 +85,11 @@
         function create() {
 
             $("#modal_data").empty();
-            $('.modal-title').text('Add New User'); // Set Title to Bootstrap modal title
+            $('.modal-title').text('Add New Blogs'); // Set Title to Bootstrap modal title
 
             $.ajax({
                 type: 'GET',
-                url: 'users/create',
+                url: 'blogs/create',
                 success: function (data) {
                     $("#modal_data").html(data.html);
                     $('#myModal').modal('show'); // show bootstrap modal
@@ -113,12 +105,12 @@
         $("#manage_all").on("click", ".edit", function () {
 
             $("#modal_data").empty();
-            $('.modal-title').text('Edit User'); // Set Title to Bootstrap modal title
+            $('.modal-title').text('Edit Blogs'); // Set Title to Bootstrap modal title
 
             var id = $(this).attr('id');
 
             $.ajax({
-                url: 'users/' + id + '/edit',
+                url: 'blogs/' + id + '/edit',
                 type: 'get',
                 success: function (data) {
                     $("#modal_data").html(data.html);
@@ -133,12 +125,12 @@
         $("#manage_all").on("click", ".view", function () {
 
             $("#modal_data").empty();
-            $('.modal-title').text('View User'); // Set Title to Bootstrap modal title
+            $('.modal-title').text('View Blogs'); // Set Title to Bootstrap modal title
 
             var id = $(this).attr('id');
 
             $.ajax({
-                url: 'users/' + id,
+                url: 'blogs/' + id,
                 type: 'get',
                 success: function (data) {
                     $("#modal_data").html(data.html);
@@ -169,10 +161,13 @@
                     cancelButtonText: "Cancel"
                 }, function () {
                     $.ajax({
-                        url: 'users/' + id,
-                        data: {"_token": CSRF_TOKEN},
+                        url: '/api/v1/blogs/' + id,
                         type: 'DELETE',
-                        dataType: 'json',
+                        headers: {
+                            "X-CSRF-TOKEN": CSRF_TOKEN,
+                            "Authorization": "Bearer {{ Cookie::get('access_token') }}",
+                        },
+                        "dataType": 'json',
                         success: function (data) {
 
                             if (data.type === 'success') {

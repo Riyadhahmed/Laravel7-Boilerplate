@@ -1,5 +1,5 @@
 @extends('backend.layouts.master')
-@section('title', ' All Users')
+@section('title', 'Laravel Api Example Using Passport')
 @section('content')
     <div class="app-page-title">
         <div class="page-title-wrapper">
@@ -7,7 +7,7 @@
                 <div class="page-title-icon">
                     <i class="pe-7s-users icon-gradient bg-mean-fruit"> </i>
                 </div>
-                <div>All Users</div>
+                <div>Laravel Api Example Using Passport</div>
                 <div class="d-inline-block ml-2">
                     @can('user-create')
                         <button class="btn btn-success" onclick="create()"><i
@@ -28,12 +28,10 @@
                                class="align-middle mb-0 table table-borderless table-striped table-hover">
                             <thead>
                             <tr>
-                                <th>#</th>
                                 <th>Photo</th>
                                 <th>User Name</th>
                                 <th>Email</th>
                                 <th>Status</th>
-                                <th>Action</th>
                             </tr>
                             </thead>
                         </table>
@@ -42,8 +40,6 @@
             </div>
         </div>
     </div>
-
-
     <style>
         @media screen and (min-width: 768px) {
             #myModal .modal-dialog {
@@ -54,25 +50,26 @@
     </style>
     <script>
         $(function () {
+
             var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+
             table = $('#manage_all').DataTable({
                 processing: true,
                 serverSide: true,
                 ajax: {
-                    "url": '{!! route('admin.allUser.users') !!}',
+                    "url": '/api/v1/users',
                     "type": "GET",
                     headers: {
                         "X-CSRF-TOKEN": CSRF_TOKEN,
+                        {{--"Authorization": "Bearer {{ Auth::user()->createToken('Admin')->accessToken }}",--}}
                     },
                     "dataType": 'json'
                 },
                 columns: [
-                    {data: 'DT_RowIndex', name: 'DT_RowIndex'},
                     {data: 'file_path', name: 'file_path'},
                     {data: 'name', name: 'name'},
                     {data: 'email', name: 'email'},
-                    {data: 'status', name: 'status'},
-                    {data: 'action', name: 'action'}
+                    {data: 'status', name: 'status'}
                 ],
                 "autoWidth": false,
             });

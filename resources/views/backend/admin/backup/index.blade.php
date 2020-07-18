@@ -50,7 +50,7 @@
                 processing: true,
                 serverSide: true,
                 "order": [[4, "desc"]],
-                ajax: '{!! route('admin.allBackups.backups') !!}',
+                ajax: '/admin/allBackups',
                 columns: [
                     {data: 'file_name', name: 'file_name'},
                     {data: 'file_size', name: 'file_size'},

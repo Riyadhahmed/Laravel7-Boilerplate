@@ -24,7 +24,7 @@ class RoleController extends Controller
         return view('backend.admin.role.index');
     }
 
-    public function allRole(Request $request)
+    public function getAll(Request $request)
     {
         if ($request->ajax()) {
 

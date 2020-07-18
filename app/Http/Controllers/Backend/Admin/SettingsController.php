@@ -24,7 +24,7 @@ class SettingsController extends Controller
         return view('backend.admin.setting.index');
     }
 
-    public function allSetting()
+    public function getAll()
     {
 
         $can_edit = $can_delete = '';

@@ -23,7 +23,7 @@ class UserController extends Controller
         return view('backend.admin.user.index');
     }
 
-    public function allUser()
+    public function getAll()
     {
         $can_edit = $can_delete = '';
         if (!auth()->user()->can('user-edit')) {

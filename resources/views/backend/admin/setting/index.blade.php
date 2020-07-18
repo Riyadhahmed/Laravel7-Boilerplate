@@ -16,7 +16,8 @@
             <div class="main-card mb-3 card">
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table id="manage_all" class="align-middle mb-0 table table-borderless table-striped table-hover">
+                        <table id="manage_all"
+                               class="align-middle mb-0 table table-borderless table-striped table-hover">
                             <thead>
                             <tr>
                                 <th>#</th>
@@ -48,7 +49,7 @@
 
                 processing: true,
                 serverSide: true,
-                ajax: '{!! route('admin.allSetting.settings') !!}',
+                ajax: '/admin/allSettings',
                 columns: [
                     {data: 'DT_RowIndex', name: 'DT_RowIndex'},
                     {data: 'name', name: 'name'},
